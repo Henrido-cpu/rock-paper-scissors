@@ -11,3 +11,8 @@ What i learned:
 
 I learned a lot of basic javascript concepts.
 I also learned to use switch more efficiently and tried to use a loop as well and it worked!
+
+Screenshot:
+
+![](screenshot.png)
+
