@@ -54,8 +54,6 @@ function getHumanChoice(target){
         case "paper":
             return "paper";
             break;
-        default: 
-            alert("Type Rock, Paper or Scissors");
    }
 }
 
@@ -83,11 +81,6 @@ GET one round of game
 */
 
 function playRound(humanChoice, computerChoice){
-
-    const results = document.querySelector(".results").firstElementChild;
-    const scoreContainer = document.querySelector(".scores");
-    const humanScoreText = scoreContainer.firstElementChild;
-    const computerScoreText = scoreContainer.lastElementChild;
     switch(true){
         case humanChoice === "rock" && computerChoice === "scissors":
             results.textContent = "You win! Rock beats Scissors";
@@ -122,13 +115,51 @@ function playRound(humanChoice, computerChoice){
         default: 
             results.textContent = ("Choices equal! No scores distributed")
     }
+    determineWinner();
 }
 
 
+/*
+CREATE function for restarting the game by checking if winner function returns true;
+STOP code execution by removing Event listener for buttons.
+IF play again button pressed, add Event listeners
+RESET scores
+*/
+
+function determineWinner(){
+    if(humanScore === 5 || computerScore === 5){
+        buttons.forEach(button => button.removeEventListener("click", handleButtons));
+        playAgainButton.classList.remove("hidden");  
+        if(humanScore === 5)winnerText.textContent = "Winner: Human";
+        if(computerScore === 5)winnerText.textContent = `Winner: Computer`; 
+    }
+
+}
 
 /*
-INITIALIZE event listeners for buttons to listen for a lick and execute the event handler function.
-*/ 
+GET elements for displaying results
+GET function that handles play again logic.
+*/
+    const buttons = document.querySelectorAll(".buttons-container button")
+    const winnerText = document.querySelector(".winner");
+    const results = document.querySelector(".result");
+    const scoreContainer = document.querySelector(".scores");
+    const humanScoreText = scoreContainer.firstElementChild;
+    const computerScoreText = scoreContainer.lastElementChild;
+
+function playAgain(){
+    buttons.forEach(button => button.addEventListener("click", handleButtons));
+    humanScore = 0;
+    computerScore = 0;
+    humanScoreText.textContent = `Your score: ${humanScore}`;
+    computerScoreText.textContent = `Computer score: ${computerScore}`;
+    playAgainButton.classList.add("hidden");
+    winnerText.textContent = "";
+}
+
+/*
+GET function to handle buttons logic to target them in other functions.
+*/
 
 function handleButtons(e){
     const target = e.target.id;
@@ -137,5 +168,11 @@ function handleButtons(e){
     playRound(humanChoice, computerChoice);
 }
 
-const buttons = document.querySelectorAll("button");
+/*
+INITIALIZE event listeners for buttons to listen for a lick and execute the event handler function.
+*/ 
+
 buttons.forEach(button => button.addEventListener("click", handleButtons));
+
+const playAgainButton = document.querySelector(".play-again")
+playAgainButton.addEventListener("click", playAgain);
