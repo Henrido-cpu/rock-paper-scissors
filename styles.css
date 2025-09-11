@@ -103,6 +103,7 @@ header p, .results-container p, .play-again{
 .play-again{
     padding:20px;
     font-size:5vw;
+    z-index: 1;
 }
 
 .play-again:hover{
