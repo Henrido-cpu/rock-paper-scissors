@@ -104,10 +104,12 @@ header p, .results-container p, .play-again{
     padding:20px;
     font-size:5vw;
     z-index: 1;
+    transition: scale 0.5s;
 }
 
 .play-again:hover{
     cursor:pointer;
+    scale:1.1;
 }
 
 .winner{

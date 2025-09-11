@@ -180,7 +180,7 @@ function handleButtons(e){
     const computerChoice = getComputerChoice();
     results.classList.remove("hidden");
     resultContainer.classList.remove("hidden");
-    scoreContainer.firstElementChild.textContent = `Human score: ${humanScore}`;
+    scoreContainer.firstElementChild.textContent = `Your score: ${humanScore}`;
     scoreContainer.lastElementChild.textContent = `Computer score ${computerScore}`;
     playRound(humanChoice, computerChoice);
 }
