@@ -5,14 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Story+Script&display=swap" rel="stylesheet">
 </head>
 <body>
+    <header>
+        <p>Rock Paper Scissors to 5 scores</p>
+    </header>
     <div class="buttons-container">
         <button id="rock">🪨</button>
         <button id="scissors">✂️</button>
         <button id="paper">🧻</button>
     </div>
     <div class="results-container">
+        <p class="winner hidden"></p>
         <p class="result"></p>
         <div class="scores">
             <p class="human-score"></p>
@@ -20,7 +27,7 @@
         </div>
         <button class="play-again hidden">Play again</button>
     </div>
-    <p class="winner"></p>
+    <a href="https://github.com/Henrido-cpu">Coded by <strong>Henrido</strong></a>
     <script src="script.js"></script>
 </body>
 </html>

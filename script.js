@@ -1,8 +1,14 @@
 /*
 Rock paper scissors game played through console with a computer.
+/* 
 
 
+/* Make sure that Results container is empty at start of game */
+const resultContainer = document.querySelector(".results-container")
+resultContainer.classList.add("hidden");
 
+
+/*
 GET for computer choice:
     INITIALIZE a random number variable that RETURNS a random number between 1-3.
     IF random number is 1
@@ -12,6 +18,8 @@ GET for computer choice:
     IF random number is 3
         RETURN Paper
 */
+
+
 
 function getComputerChoice(){
     let randomNum = Math.floor(Math.random() * 3) + 1;
@@ -130,6 +138,8 @@ function determineWinner(){
     if(humanScore === 5 || computerScore === 5){
         buttons.forEach(button => button.removeEventListener("click", handleButtons));
         playAgainButton.classList.remove("hidden");  
+        winnerText.classList.remove("hidden");
+        setTimeout(() => results.classList.add("hidden"), 1000);
         if(humanScore === 5)winnerText.textContent = "Winner: Human";
         if(computerScore === 5)winnerText.textContent = `Winner: Computer`; 
     }
@@ -147,6 +157,7 @@ GET function that handles play again logic.
     const humanScoreText = scoreContainer.firstElementChild;
     const computerScoreText = scoreContainer.lastElementChild;
 
+
 function playAgain(){
     buttons.forEach(button => button.addEventListener("click", handleButtons));
     humanScore = 0;
@@ -155,6 +166,8 @@ function playAgain(){
     computerScoreText.textContent = `Computer score: ${computerScore}`;
     playAgainButton.classList.add("hidden");
     winnerText.textContent = "";
+    results.classList.add("hidden");
+    winnerText.classList.add("hidden");
 }
 
 /*
@@ -165,6 +178,10 @@ function handleButtons(e){
     const target = e.target.id;
     const humanChoice = getHumanChoice(target);
     const computerChoice = getComputerChoice();
+    results.classList.remove("hidden");
+    resultContainer.classList.remove("hidden");
+    scoreContainer.firstElementChild.textContent = `Human score: ${humanScore}`;
+    scoreContainer.lastElementChild.textContent = `Computer score ${computerScore}`;
     playRound(humanChoice, computerChoice);
 }
 
