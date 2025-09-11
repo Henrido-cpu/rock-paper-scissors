@@ -40,8 +40,10 @@ GET for Human choice
         RETURN rock
 */
 
-function getHumanChoice(){
-   let humanChoice = prompt("Enter choice", "Rock, Paper or perhaps Scissors?").toLowerCase();
+function getHumanChoice(target){
+
+    const humanChoice = target;
+
    switch (humanChoice){
         case "scissors":
             return "scissors";
@@ -81,73 +83,59 @@ GET one round of game
 */
 
 function playRound(humanChoice, computerChoice){
+
+    const results = document.querySelector(".results").firstElementChild;
+    const scoreContainer = document.querySelector(".scores");
+    const humanScoreText = scoreContainer.firstElementChild;
+    const computerScoreText = scoreContainer.lastElementChild;
     switch(true){
         case humanChoice === "rock" && computerChoice === "scissors":
-            console.log("You win! Rock beats Scissors");
-            humanScore += 1;
+            results.textContent = "You win! Rock beats Scissors";
+            humanScoreText.textContent = `Your score: ${humanScore += 1}`;
+            computerScoreText.textContent = `Computer score: ${computerScore}`;
             break;
         case humanChoice === "scissors" && computerChoice === "rock":
-            console.log("You lose! Rock beats Scissors");
-            computerScore +=1;
+            results.textContent = ("You lose! Rock beats Scissors");
+            humanScoreText.textContent = `Your score: ${humanScore}`;
+            computerScoreText.textContent = `Computer score: ${computerScore += 1}`;
             break;
         case humanChoice === "paper" && computerChoice === "rock":
-            console.log("You win! Paper beats Rock");
-            humanScore += 1;
+            results.textContent = ("You win! Paper beats Rock");
+            humanScoreText.textContent = `Your score: ${humanScore += 1}`;
+            computerScoreText.textContent = `Computer score: ${computerScore}`;
             break;
         case humanChoice === "rock" && computerChoice === "paper":
-            console.log("You lose! Paper beats Rock");
-            computerScore +=1;
+            results.textContent = ("You lose! Paper beats Rock");
+            humanScoreText.textContent = `Your score: ${humanScore}`;
+            computerScoreText.textContent = `Computer score: ${computerScore += 1}`;
             break;
         case humanChoice === "scissors" && computerChoice === "paper":
-            console.log("You win! Scissors beats Paper");
-            humanScore += 1;
+            results.textContent = ("You win! Scissors beats Paper");
+            humanScoreText.textContent = `Your score: ${humanScore += 1}`;
+            computerScoreText.textContent = `Computer score: ${computerScore}`;
             break;
         case humanChoice === "paper" && computerChoice === "scissors":
-            console.log("You lose! Scissors beats Paper");
-            computerScore +=1;
+            results.textContent = ("You lose! Scissors beats Paper");
+            humanScoreText.textContent = `Your score: ${humanScore}`;
+            computerScoreText.textContent = `Computer score: ${computerScore += 1}`;
             break;
         default: 
-            console.log("Choices equal! No scores distributed")
+            results.textContent = ("Choices equal! No scores distributed")
     }
 }
+
 
 
 /*
-GET full game of 5 rounds
-    GET round and GET score variables
-        LOOP rounds until someone with a score of 5 wins.
-    PRINT winner 
-*/
+INITIALIZE event listeners for buttons to listen for a lick and execute the event handler function.
+*/ 
 
-function playGame(){
-    while(humanScore < 5 && computerScore < 5){
-        const humanSelection = getHumanChoice();
-        const computerSelection = getComputerChoice();
-        console.log(`Your choice: ${humanSelection}, Computer choice: ${computerSelection}`);
-        playRound(humanSelection, computerSelection);
-        console.log(`Your score: ${humanScore}, Computer Score: ${computerScore}`);
-    }
-    if(humanScore === 5){
-        alert("You win, woohoo!");
-        const choice = prompt("Wanna play again, yes or no").toLowerCase();
-        if(choice === "yes"){
-            humanScore = 0;
-            computerScore = 0;
-            playGame();
-        }else if (choice === "no"){
-            return;
-        }
-
-    }else if(computerScore === 5){
-        alert("You lost, oh no!");
-        const choice = prompt("Wanna play again, yes or no").toLowerCase();
-        if(choice === "yes"){
-            humanScore = 0;
-            computerScore = 0;
-            playGame();
-        }else if (choice === "no"){
-            return;
-        }
-    }
+function handleButtons(e){
+    const target = e.target.id;
+    const humanChoice = getHumanChoice(target);
+    const computerChoice = getComputerChoice();
+    playRound(humanChoice, computerChoice);
 }
-playGame();
+
+const buttons = document.querySelectorAll("button");
+buttons.forEach(button => button.addEventListener("click", handleButtons));
